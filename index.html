@@ -273,6 +273,17 @@
       padding-left: 16px;
     }
 
+    .spec-highlight {
+      background-color: var(--highlight-bg);
+      border: 1px solid var(--highlight-border);
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: var(--highlight-text);
+      font-weight: 600;
+      display: inline-block;
+      margin: 1px 0;
+    }
+
     .hardiness-badge {
       display: block;
       font-weight: normal;
@@ -785,9 +796,23 @@
         ["Soil Type", plant.soil]
       ].forEach(([label, value]) => {
         const item = document.createElement("li");
-        item.textContent = `${label}: ${value}`;
+        item.append(`${label}: `);
+
+        if (isMemorisationSpecific(value)) {
+          const highlight = document.createElement("span");
+          highlight.className = "spec-highlight";
+          highlight.textContent = value;
+          item.appendChild(highlight);
+        } else {
+          item.append(value);
+        }
+
         list.appendChild(item);
       });
+    }
+
+    function isMemorisationSpecific(value) {
+      return value.trim().toLowerCase() !== "any";
     }
 
     function loadPlantImages(plant) {

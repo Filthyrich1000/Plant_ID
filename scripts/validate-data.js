@@ -61,5 +61,7 @@ assert(indexHtml.includes("Light Exposure"), "index.html must label Light Exposu
 assert(indexHtml.includes("Aspect"), "index.html must label Aspect.");
 assert(indexHtml.includes("pH"), "index.html must label pH.");
 assert(indexHtml.includes("Soil Type"), "index.html must label Soil Type.");
+assert(indexHtml.includes("spec-highlight"), "index.html must keep highlight styling for specific memorisation criteria.");
+assert(indexHtml.includes("isMemorisationSpecific"), "index.html must only highlight non-Any criteria values.");
 
 console.log("Plant data validation passed.");
