@@ -496,7 +496,7 @@
             <button class="def-btn" type="button" onclick="showHardinessModal()">View Definition</button>
           </div>
           <div class="criteria-item">
-            <strong>Light, Aspect, pH & Soil (AC 1.3)</strong>
+            <strong>Light, Aspect, pH, Soil & Moisture (AC 1.3)</strong>
             <ul class="criteria-list" id="metaLightSoil"></ul>
           </div>
           <div class="criteria-item" style="grid-column: span 2;">
@@ -788,13 +788,15 @@
     function renderLightSoil(plant) {
       const list = document.getElementById("metaLightSoil");
       list.innerHTML = "";
+      const soilCriteria = splitSoilAndMoisture(plant.soil);
 
       [
-        ["Light Exposure", plant.light],
-        ["Aspect", plant.aspect],
-        ["pH", plant.pH],
-        ["Soil Type", plant.soil]
-      ].forEach(([label, value]) => {
+        ["Light Exposure", normalizeAnyEquivalent("light", plant.light)],
+        ["Aspect", normalizeAnyEquivalent("aspect", plant.aspect)],
+        ["pH", normalizeAnyEquivalent("pH", plant.pH)],
+        ["Soil Type", normalizeAnyEquivalent("soil", soilCriteria.soilType)],
+        ["Moisture", soilCriteria.moisture]
+      ].filter(([, value]) => Boolean(value)).forEach(([label, value]) => {
         const item = document.createElement("li");
         item.append(`${label}: `);
 
@@ -809,6 +811,48 @@
 
         list.appendChild(item);
       });
+    }
+
+    function splitSoilAndMoisture(soil) {
+      const match = soil.match(/^(.*?)\s*\(([^()]*)\)\s*$/);
+      if (!match) {
+        return { soilType: soil, moisture: "" };
+      }
+
+      return {
+        soilType: match[1].trim(),
+        moisture: sentenceCase(match[2].trim())
+      };
+    }
+
+    function normalizeAnyEquivalent(kind, value) {
+      const canonical = listTokens(value);
+      const anySets = {
+        light: ["full shade", "full sun", "partial shade"],
+        aspect: ["east-facing", "north-facing", "south-facing", "west-facing"],
+        pH: ["acid", "alkaline", "neutral"],
+        soil: ["chalk", "clay", "loam", "sand"]
+      };
+
+      const anySet = anySets[kind];
+      if (!anySet) return value;
+
+      const hasAllOptions = anySet.every((option) => canonical.includes(option));
+      const hasOnlyKnownOptions = canonical.every((option) => anySet.includes(option));
+      return hasAllOptions && hasOnlyKnownOptions ? "Any" : value;
+    }
+
+    function listTokens(value) {
+      return value
+        .toLowerCase()
+        .replace(/\bor\b/g, ",")
+        .split(",")
+        .map((token) => token.trim())
+        .filter(Boolean);
+    }
+
+    function sentenceCase(value) {
+      return value ? value.charAt(0).toUpperCase() + value.slice(1) : value;
     }
 
     function isMemorisationSpecific(value) {

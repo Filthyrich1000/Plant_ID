@@ -61,7 +61,10 @@ assert(indexHtml.includes("Light Exposure"), "index.html must label Light Exposu
 assert(indexHtml.includes("Aspect"), "index.html must label Aspect.");
 assert(indexHtml.includes("pH"), "index.html must label pH.");
 assert(indexHtml.includes("Soil Type"), "index.html must label Soil Type.");
+assert(indexHtml.includes("Moisture"), "index.html must split soil moisture into its own row.");
 assert(indexHtml.includes("spec-highlight"), "index.html must keep highlight styling for specific memorisation criteria.");
 assert(indexHtml.includes("isMemorisationSpecific"), "index.html must only highlight non-Any criteria values.");
+assert(indexHtml.includes("normalizeAnyEquivalent"), "index.html must normalise complete RHS option sets to Any.");
+assert(indexHtml.includes("splitSoilAndMoisture"), "index.html must split soil type from moisture.");
 
 console.log("Plant data validation passed.");
