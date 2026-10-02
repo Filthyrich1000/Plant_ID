@@ -3,7 +3,7 @@
 ## Source scope
 
 - Official syllabus list: uploaded `L2 PCA1 Plant List v9 25.08.2026` PDF.
-- Plant profile data source: RHS plant profiles on `rhs.org.uk`, stored per plant in `plant-data.js` as `sourceUrl`.
+- Plant profile data source: RHS plant profiles on `rhs.org.uk`, stored per plant in the standalone `index.html` file as `sourceUrl`.
 - Current focus group now contains exactly:
   - `Araucaria araucana`
   - `Buxus sempervirens`
@@ -35,7 +35,7 @@
 
 ## Implementation safeguards
 
-- Data is now separated into `plant-data.js` rather than embedded deep inside the page.
+- The distributable app is now a single standalone `index.html` file; no companion `.js` or `.json` file is required to open it in a browser.
 - Every plant record includes an RHS source URL.
 - `npm test` validates:
   - 46 PCA1 plant records are present.

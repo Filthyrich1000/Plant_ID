@@ -1,6 +1,20 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { focusGroupIds, hardinessDict, rhsPlantDatabase } = require("../plant-data");
+const vm = require("node:vm");
+
+const indexHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const inlineScripts = [...indexHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
+const dataScript = inlineScripts.find((script) => script.includes("const rhsPlantDatabase"));
+
+if (!dataScript) {
+  throw new Error("Could not find inlined plant data in index.html.");
+}
+
+const context = { window: {}, globalThis: {} };
+vm.createContext(context);
+vm.runInContext(dataScript, context);
+
+const { focusGroupIds, hardinessDict, rhsPlantDatabase } = context.window.RHSPlantData;
 
 const expectedFocusNames = [
   "Araucaria araucana",
@@ -42,7 +56,7 @@ rhsPlantDatabase.forEach((plant) => {
   });
 });
 
-const indexHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+assert(!indexHtml.includes('src="./plant-data.js"'), "index.html must be standalone and not reference plant-data.js.");
 assert(indexHtml.includes("Light Exposure"), "index.html must label Light Exposure.");
 assert(indexHtml.includes("Aspect"), "index.html must label Aspect.");
 assert(indexHtml.includes("pH"), "index.html must label pH.");
