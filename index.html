@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RHS Level 2 PCA1 Plant Identification Examiner</title>
+  <title>RHS L2 PCA1 plant ID learning aid</title>
   <style>
     :root {
       --bg-color: #f4f7f5;
@@ -423,10 +423,10 @@
     .hidden { display: none !important; }
   </style>
 </head>
-<body>
+<body class="dark-mode">
   <div class="container">
     <header>
-      <h1>RHS L2 PCA1 Examiner</h1>
+      <h1>RHS L2 PCA1 plant ID learning aid</h1>
       <button class="theme-toggle" type="button" onclick="toggleTheme()">Light / Dark Mode</button>
     </header>
 
@@ -438,7 +438,7 @@
 
       <div class="row">
         <select id="groupFilter" onchange="filterByGroup()">
-          <option value="CURRENT_11">Current Focus Group (11 Plants)</option>
+          <option value="CURRENT_11">Batch 1 (11 Plants)</option>
           <option value="ALL">All PCA1 Plants (46)</option>
         </select>
         <button class="btn-sub" type="button" onclick="openCustomGroupModal()">New Group</button>
