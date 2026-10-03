@@ -60,6 +60,9 @@ assert(!indexHtml.includes('src="./plant-data.js"'), "index.html must be standal
 assert(indexHtml.includes('<body class="dark-mode">'), "index.html must default to dark mode.");
 assert(indexHtml.includes("RHS L2 PCA1 plant ID learning aid"), "index.html must use the learning aid title.");
 assert(indexHtml.includes("Batch 1 (11 Plants)"), "index.html must label the current focus group as Batch 1.");
+assert(indexHtml.includes("answerInput"), "index.html must provide a typed answer fallback.");
+assert(indexHtml.includes("voiceStatus"), "index.html must show microphone status and errors.");
+assert(indexHtml.includes("speechErrorMessage"), "index.html must explain speech recognition failures.");
 assert(indexHtml.includes("Light Exposure"), "index.html must label Light Exposure.");
 assert(indexHtml.includes("Aspect"), "index.html must label Aspect.");
 assert(indexHtml.includes("pH"), "index.html must label pH.");

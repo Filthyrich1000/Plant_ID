@@ -353,12 +353,25 @@
     .transcript-box {
       min-height: 48px;
       background: var(--grid-bg);
+      color: var(--text);
       border-radius: 6px;
       padding: 8px;
       font-size: 0.85rem;
       text-align: left;
       margin: 8px 0;
       border: 1px solid var(--border);
+      box-sizing: border-box;
+      width: 100%;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .voice-status {
+      font-size: 0.76rem;
+      text-align: left;
+      line-height: 1.35;
+      opacity: 0.85;
+      margin: 2px 0 8px;
     }
 
     .action-btns {
@@ -534,7 +547,8 @@
       </div>
 
       <button class="mic-btn" id="micBtn" type="button" onclick="toggleSpeech()">🎙️</button>
-      <div class="transcript-box" id="transcriptBox">Spoken text will appear here...</div>
+      <div class="voice-status" id="voiceStatus">Use the microphone for browser speech-to-text, or type your answer below.</div>
+      <textarea class="transcript-box" id="answerInput" rows="4" placeholder="Spoken text will appear here, or type your answer manually..."></textarea>
 
       <div class="action-btns">
         <button class="btn btn-submit" type="button" onclick="evaluateAnswer()">Evaluate Answer</button>
@@ -662,6 +676,7 @@
     let currentImageIndex = 0;
     let recognition = null;
     let isRecording = false;
+let finalTranscript = "";
 
     window.addEventListener("DOMContentLoaded", () => {
       loadSavedApiKey();
@@ -765,7 +780,8 @@
       document.getElementById("plantIdentityBlock").classList.add("hidden");
       document.getElementById("criteriaGrid").classList.add("hidden");
       document.getElementById("feedbackBox").style.display = "none";
-      document.getElementById("transcriptBox").textContent = "Spoken text will appear here...";
+      document.getElementById("answerInput").value = "";
+      finalTranscript = "";
 
       document.getElementById("plantCategory").textContent = plant.category;
       document.getElementById("plantBotanical").textContent = plant.botanicalName;
@@ -1073,41 +1089,88 @@
         recognition.lang = "en-GB";
 
         recognition.onresult = (event) => {
-          let transcript = "";
-          for (let i = 0; i < event.results.length; i += 1) {
-            transcript += event.results[i][0].transcript;
+          let interimTranscript = "";
+          for (let i = event.resultIndex; i < event.results.length; i += 1) {
+            const phrase = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += `${phrase} `;
+            } else {
+              interimTranscript += phrase;
+            }
           }
-          document.getElementById("transcriptBox").textContent = transcript.trim();
+          document.getElementById("answerInput").value = `${finalTranscript}${interimTranscript}`.trim();
+        };
+
+        recognition.onstart = () => {
+          setVoiceStatus("Listening... speak your plant ID answer, then press the microphone again to stop.");
         };
 
         recognition.onerror = (event) => {
           console.error("Speech recognition error:", event.error);
-          stopRecording();
+          stopRecording(speechErrorMessage(event.error));
         };
 
         recognition.onend = () => {
-          stopRecording();
+          stopRecording("Speech recognition stopped. You can edit the text before evaluating.");
         };
+
+        setVoiceStatus("Speech recognition is available. If the microphone does not start from a file, open this page via http://localhost or HTTPS, or type your answer.");
       } else {
-        document.getElementById("transcriptBox").textContent = "Speech Recognition not supported in this browser.";
+        setVoiceStatus("Speech recognition is not supported in this browser. Type your answer below and Gemini can still evaluate it.");
+        document.getElementById("micBtn").disabled = true;
+        document.getElementById("micBtn").title = "Speech recognition is not supported in this browser.";
       }
     }
 
     function toggleSpeech() {
-      if (!recognition) return;
+      if (!recognition) {
+        setVoiceStatus("Speech recognition is not supported here. Type your answer below and press Evaluate Answer.");
+        return;
+      }
+
       if (isRecording) {
         recognition.stop();
-        stopRecording();
+        stopRecording("Stopping...");
       } else {
-        recognition.start();
-        isRecording = true;
-        document.getElementById("micBtn").classList.add("recording");
+        finalTranscript = document.getElementById("answerInput").value.trim();
+        finalTranscript = finalTranscript ? `${finalTranscript} ` : "";
+
+        if (!window.isSecureContext && location.protocol === "file:") {
+          setVoiceStatus("Trying to start the microphone. If nothing happens, open the file through a local server such as http://localhost:8000; many browsers block speech recognition from file:// pages.");
+        }
+
+        try {
+          recognition.start();
+          isRecording = true;
+          document.getElementById("micBtn").classList.add("recording");
+        } catch (error) {
+          console.error(error);
+          stopRecording("Could not start speech recognition. If the file was opened directly, try serving it from http://localhost, or type your answer below.");
+        }
       }
     }
 
-    function stopRecording() {
+    function stopRecording(message = "") {
       isRecording = false;
       document.getElementById("micBtn").classList.remove("recording");
+      if (message) {
+        setVoiceStatus(message);
+      }
+    }
+
+    function setVoiceStatus(message) {
+      document.getElementById("voiceStatus").textContent = message;
+    }
+
+    function speechErrorMessage(error) {
+      const messages = {
+        "not-allowed": "Microphone permission was blocked. Allow microphone access in the browser, open via http://localhost or HTTPS, or type your answer below.",
+        "service-not-allowed": "This browser refused the speech recognition service. Try Chrome over http://localhost/HTTPS, or type your answer below.",
+        "no-speech": "No speech was detected. Press the microphone and try again, or type your answer below.",
+        "audio-capture": "No microphone was found or it could not be opened. Check your system input settings, or type your answer below.",
+        network: "Speech recognition had a network/service error. Type your answer below and Gemini can still evaluate it."
+      };
+      return messages[error] || `Speech recognition error: ${error}. You can type your answer below instead.`;
     }
 
     async function evaluateAnswer() {
@@ -1117,9 +1180,9 @@
         return;
       }
 
-      const transcript = document.getElementById("transcriptBox").textContent;
-      if (!transcript || transcript === "Spoken text will appear here...") {
-        alert("Please record your answer using the microphone first.");
+      const transcript = document.getElementById("answerInput").value.trim();
+      if (!transcript) {
+        alert("Please record or type your answer first.");
         return;
       }
 
