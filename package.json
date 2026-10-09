@@ -1,0 +1,8 @@
+{
+  "name": "rhs-pca1-plant-examiner",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/validate-data.js"
+  }
+}
