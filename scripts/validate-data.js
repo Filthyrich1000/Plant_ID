@@ -14,12 +14,12 @@ const context = { window: {}, globalThis: {} };
 vm.createContext(context);
 vm.runInContext(dataScript, context);
 
-const { focusGroupIds, hardinessDict, rhsPlantDatabase } = context.window.RHSPlantData;
+const { focusGroupIds, batch2Ids, builtInPlantPhotos, hardinessDict, rhsPlantDatabase } = context.window.RHSPlantData;
 
 const expectedFocusNames = [
   "Araucaria araucana",
   "Buxus sempervirens",
-  "× Cuprocyparis leylandii",
+  "X Cuprocyparis leylandii",
   "Daphne bholua",
   "Ilex aquifolium",
   "Monstera deliciosa",
@@ -28,6 +28,21 @@ const expectedFocusNames = [
   "Skimmia japonica",
   "Taxus baccata",
   "Viburnum davidii"
+].sort();
+
+const expectedBatch2Names = [
+  "Acer griseum",
+  "Aesculus hippocastanum",
+  "Berberis darwinii",
+  "Capsella bursa-pastoris",
+  "Choisya ternata",
+  "Cornus sanguinea",
+  "Fagus sylvatica",
+  "Liriope muscari",
+  "Photinia × fraseri",
+  "Phyllostachys aurea",
+  "Quercus robur",
+  "Spathiphyllum wallisii"
 ].sort();
 
 function assert(condition, message) {
@@ -42,10 +57,15 @@ const focusNames = rhsPlantDatabase
   .filter((plant) => focusGroupIds.includes(plant.id))
   .map((plant) => plant.botanicalName)
   .sort();
+const batch2Names = rhsPlantDatabase
+  .filter((plant) => batch2Ids.includes(plant.id))
+  .map((plant) => plant.botanicalName)
+  .sort();
 
 assert(rhsPlantDatabase.length === 46, `Expected 46 PCA1 plants, found ${rhsPlantDatabase.length}.`);
 assert(new Set(ids).size === ids.length, "Plant IDs must be unique.");
 assert(JSON.stringify(focusNames) === JSON.stringify(expectedFocusNames), `Focus group mismatch: ${focusNames.join(", ")}`);
+assert(JSON.stringify(batch2Names) === JSON.stringify(expectedBatch2Names), `Batch 2 mismatch: ${batch2Names.join(", ")}`);
 assert(!names.includes("Rosmarinus officinalis"), "Rosmarinus officinalis must not replace Salvia rosmarinus.");
 
 rhsPlantDatabase.forEach((plant) => {
@@ -60,9 +80,15 @@ assert(!indexHtml.includes('src="./plant-data.js"'), "index.html must be standal
 assert(indexHtml.includes('<body class="dark-mode">'), "index.html must default to dark mode.");
 assert(indexHtml.includes("RHS L2 PCA1 plant ID learning aid"), "index.html must use the learning aid title.");
 assert(indexHtml.includes("Batch 1 (11 Plants)"), "index.html must label the current focus group as Batch 1.");
-assert(indexHtml.includes("answerInput"), "index.html must provide a typed answer fallback.");
-assert(indexHtml.includes("voiceStatus"), "index.html must show microphone status and errors.");
-assert(indexHtml.includes("speechErrorMessage"), "index.html must explain speech recognition failures.");
+assert(indexHtml.includes("Batch 2 (12 Plants)"), "index.html must provide Batch 2.");
+assert(!indexHtml.includes("Gemini"), "index.html must not include Gemini learning feedback.");
+assert(!indexHtml.includes("Upload Custom Photo"), "index.html must not include browser-cache photo uploads.");
+assert(indexHtml.includes("plantHint"), "index.html must include the Test Yourself hint placeholder.");
+assert(indexHtml.includes("compareHintA"), "index.html must include Compare Plants hint placeholders.");
+assert(indexHtml.includes("botanicalNameHtml"), "index.html must render botanical names with partial italics in HTML.");
+assert(indexHtml.includes("botanicalNameForPlainText"), "index.html must format botanical names in native dropdown labels.");
+assert(builtInPlantPhotos["4"]?.includes("Acer_griseum.png"), "Batch 2 Acer photo filename must be configured.");
+assert(builtInPlantPhotos["78"]?.includes("Photinia_×_fraseri.png"), "Batch 2 Photinia photo filename must be configured.");
 assert(indexHtml.includes("Light Exposure"), "index.html must label Light Exposure.");
 assert(indexHtml.includes("Aspect"), "index.html must label Aspect.");
 assert(indexHtml.includes("pH"), "index.html must label pH.");

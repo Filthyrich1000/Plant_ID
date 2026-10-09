@@ -81,6 +81,30 @@
       font-weight: bold;
     }
 
+    .theme-icon {
+      display: inline-block;
+      margin-right: 5px;
+      font-size: 1rem;
+      line-height: 1;
+      vertical-align: -1px;
+    }
+
+    .toggle-icon {
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 0.95rem;
+      line-height: 1;
+      vertical-align: -1px;
+      color: var(--text);
+    }
+
+    .toggle-icon svg {
+      width: 1em;
+      height: 1em;
+      vertical-align: -2px;
+      fill: currentColor;
+    }
+
     .control-panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -110,26 +134,19 @@
       gap: 6px;
     }
 
-    .api-box button,
     .btn-sub {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 4px;
       font-weight: bold;
       cursor: pointer;
       white-space: nowrap;
-    }
-
-    .btn-sub {
       font-size: 0.75rem;
-      padding: 6px 10px;
     }
 
-    .card,
-    .voice-section,
-    .feedback-box {
+    .card {
       background: var(--card-bg);
       border-radius: 12px;
       border: 1px solid var(--border);
@@ -140,7 +157,8 @@
 
     .image-container {
       width: 100%;
-      height: 250px;
+      aspect-ratio: 16 / 9;
+      min-height: 250px;
       background-color: var(--grid-bg);
       position: relative;
       display: flex;
@@ -152,7 +170,7 @@
     .image-container img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .image-loading {
@@ -181,14 +199,102 @@
 
     .image-badge {
       position: absolute;
-      bottom: 8px;
+      top: 8px;
       right: 8px;
       background: rgba(0, 0, 0, 0.65);
-      color: white;
-      font-size: 0.7rem;
+      color: var(--text);
+      font-size: 0.5rem;
       padding: 3px 8px;
       border-radius: 10px;
+    }
+
+
+    .page-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .page-tab {
+      flex: 1;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      border-radius: 7px;
+      cursor: pointer;
       font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    .page-tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .compare-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .compare-image-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      background: var(--grid-bg);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compare-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .compare-image-container .carousel-btn {
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+    }
+
+    .compare-title {
+      padding: 8px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .compare-hint {
+      padding: 0 8px 8px;
+      text-align: center;
+      font-size: 0.76rem;
+      line-height: 1.35;
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    .compare-controls {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .upload-bar {
@@ -201,9 +307,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .card-body,
-    .voice-section,
-    .feedback-box {
+    .card-body {
       padding: 14px;
     }
 
@@ -222,6 +326,14 @@
       font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 2px;
+    }
+
+    .plant-hint {
+      font-size: 0.82rem;
+      line-height: 1.35;
+      color: var(--text);
+      opacity: 0.88;
+      margin: -2px 0 8px;
     }
 
     .botanical-name {
@@ -309,105 +421,6 @@
       word-break: break-word;
     }
 
-    .checklist-box {
-      text-align: left;
-      background: var(--grid-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin: 8px 0 12px 0;
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
-
-    .checklist-box ol {
-      margin: 4px 0 0 0;
-      padding-left: 18px;
-    }
-
-    .mic-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s;
-      margin: 4px 0 8px 0;
-    }
-
-    .mic-btn.recording {
-      background: var(--danger);
-      animation: pulse 1.2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-
-    .transcript-box {
-      min-height: 48px;
-      background: var(--grid-bg);
-      color: var(--text);
-      border-radius: 6px;
-      padding: 8px;
-      font-size: 0.85rem;
-      text-align: left;
-      margin: 8px 0;
-      border: 1px solid var(--border);
-      box-sizing: border-box;
-      width: 100%;
-      resize: vertical;
-      font-family: inherit;
-    }
-
-    .voice-status {
-      font-size: 0.76rem;
-      text-align: left;
-      line-height: 1.35;
-      opacity: 0.85;
-      margin: 2px 0 8px;
-    }
-
-    .action-btns {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .btn {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .btn-submit { background: var(--primary); color: white; }
-    .btn-next { background: #6c757d; color: white; }
-
-    .feedback-score {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .feedback-list {
-      font-size: 0.85rem;
-      padding-left: 18px;
-      margin: 6px 0;
-    }
-
-    .correct { color: #2e7d32; }
-    .omitted { color: var(--danger); }
-
     .modal {
       display: none;
       position: fixed;
@@ -433,6 +446,23 @@
       overflow-y: auto;
     }
 
+    .plant-navigation {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .plant-nav-btn {
+      flex: 1;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
     .hidden { display: none !important; }
   </style>
 </head>
@@ -440,59 +470,58 @@
   <div class="container">
     <header>
       <h1>RHS L2 PCA1 plant ID learning aid</h1>
-      <button class="theme-toggle" type="button" onclick="toggleTheme()">Light / Dark Mode</button>
+      <button class="theme-toggle" type="button" onclick="toggleTheme()" title="Toggle light / dark mode"><span class="theme-icon" id="themeIcon" aria-label="Toggle light / dark mode">☀</span></button>
     </header>
 
+    <div class="page-tabs">
+      <button class="page-tab active" id="testTab" type="button" onclick="showPage('testPage', this)">Test yourself</button>
+      <button class="page-tab" id="compareTab" type="button" onclick="showPage('comparePage', this)">Compare plants</button>
+    </div>
+
     <div class="control-panel">
-      <div class="api-box">
-        <input type="password" id="apiKeyInput" placeholder="Paste Gemini API Key...">
-        <button type="button" onclick="saveApiKey()">Save</button>
-      </div>
-
-      <div class="row">
-        <select id="groupFilter" onchange="filterByGroup()">
-          <option value="CURRENT_11">Batch 1 (11 Plants)</option>
-          <option value="ALL">All PCA1 Plants (46)</option>
-        </select>
-        <button class="btn-sub" type="button" onclick="openCustomGroupModal()">New Group</button>
-      </div>
-
-      <select id="categoryFilter" onchange="filterCategory()">
-        <option value="ALL">All Plant Categories</option>
-      </select>
-
-      <select id="plantSelect" onchange="selectSpecificPlant()">
-        <option value="RANDOM">Practice Specific Plant...</option>
+      <select id="groupFilter" onchange="filterByGroup()">
+        <option value="CURRENT_11">Batch 1 (11 Plants)</option>
+        <option value="BATCH_2">Batch 2 (12 Plants)</option>
+        <option value="ALL">All PCA1 Plants (46)</option>
       </select>
     </div>
 
-    <div class="card" id="plantCard">
+    <div id="testPage">
+      <div class="control-panel">
+        <select id="categoryFilter" onchange="filterCategory()">
+          <option value="ALL">All Plant Categories</option>
+        </select>
+
+        <select id="plantSelect" onchange="selectSpecificPlant()">
+          <option value="RANDOM">Practice Specific Plant...</option>
+        </select>
+      </div>
+
+      <div class="card" id="plantCard">
       <div class="image-container">
         <button class="carousel-btn left hidden" id="prevImgBtn" type="button" onclick="prevImage()">‹</button>
-        <span class="image-loading" id="imageLoading">Fetching photo...</span>
+        <span class="image-loading" id="imageLoading">Loading photo...</span>
         <img id="plantImage" src="" alt="Plant image" class="hidden">
         <button class="carousel-btn right hidden" id="nextImgBtn" type="button" onclick="nextImage()">›</button>
         <div class="image-badge hidden" id="imageBadge">Image 1 of 1</div>
       </div>
 
-      <div class="upload-bar">
-        <label style="font-size:0.75rem; font-weight:bold; color:var(--primary); cursor:pointer;">
-          Upload Custom Photo
-          <input type="file" id="imageUploader" accept="image/*" multiple style="display:none;" onchange="handleImageUpload(event)">
-        </label>
-        <button id="deleteImgBtn" class="def-btn hidden" type="button" style="color:var(--danger);" onclick="deleteCurrentImage()">Delete Photo</button>
-      </div>
-
       <div class="card-body">
-        <button class="toggle-btn" type="button" onclick="toggleIdentity()">Show / Hide Plant Identity</button>
+        <div class="plant-navigation">
+          <button class="plant-nav-btn" type="button" onclick="previousPlant()">← Previous</button>
+          <button class="plant-nav-btn" type="button" onclick="nextPlant()">Next →</button>
+        </div>
+
+        <button class="toggle-btn" type="button" onclick="toggleIdentity()"><span class="toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.2 8.4 1 12c1.2 3.6 5.5 7 11 7s9.3-3.4 11-7c-1.2-3.6-5.5-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2.2A1.8 1.8 0 1 0 12 10a1.8 1.8 0 0 0 0 3.6z"/></svg></span>Show / Hide Plant Identity</button>
 
         <div id="plantIdentityBlock" class="hidden">
           <span class="plant-id-tag" id="plantCategory">Shrub</span>
           <div class="plant-title"><span class="botanical-name" id="plantBotanical">Sarcococca confusa</span></div>
           <div style="font-size: 0.85rem; color: #777; margin-bottom: 8px;" id="plantCommon">Common: sweet box</div>
+          <div class="plant-hint hidden" id="plantHint"></div>
         </div>
 
-        <button class="toggle-btn" type="button" onclick="toggleCriteria()">Show / Hide Criteria</button>
+        <button class="toggle-btn" type="button" onclick="toggleCriteria()"><span class="toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.2 8.4 1 12c1.2 3.6 5.5 7 11 7s9.3-3.4 11-7c-1.2-3.6-5.5-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2.2A1.8 1.8 0 1 0 12 10a1.8 1.8 0 0 0 0 3.6z"/></svg></span>Show / Hide Criteria</button>
 
         <div class="criteria-grid hidden" id="criteriaGrid">
           <div class="criteria-item">
@@ -530,41 +559,46 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="voice-section">
-      <div style="font-size:0.88rem; font-weight:bold; color:var(--primary);">Tap to Speak Your Answer</div>
-
-      <div class="checklist-box">
-        <strong>Response Checklist (Logical Order):</strong>
-        <ol>
-          <li><strong>Names:</strong> Botanical name and common name</li>
-          <li><strong>Category & Habit:</strong> Plant type, life form and growth habit</li>
-          <li><strong>Dimensions:</strong> Mature height and spread ranges</li>
-          <li><strong>Hardiness, Light & Soil:</strong> RHS hardiness rating, light exposure, aspect, pH and soil type</li>
-          <li><strong>Features & Garden Uses:</strong> Key features, suggested planting locations and garden types</li>
-        </ol>
-      </div>
-
-      <button class="mic-btn" id="micBtn" type="button" onclick="toggleSpeech()">🎙️</button>
-      <div class="voice-status" id="voiceStatus">Use the microphone for browser speech-to-text, or type your answer below.</div>
-      <textarea class="transcript-box" id="answerInput" rows="4" placeholder="Spoken text will appear here, or type your answer manually..."></textarea>
-
-      <div class="action-btns">
-        <button class="btn btn-submit" type="button" onclick="evaluateAnswer()">Evaluate Answer</button>
-        <button class="btn btn-next" type="button" onclick="loadRandomPlant()">Next Plant</button>
       </div>
     </div>
 
-    <div class="feedback-box" id="feedbackBox" style="display:none;">
-      <div class="feedback-score" id="feedbackScore">Score: -/10</div>
-      <div style="font-size:0.8rem; font-weight:bold; margin-top:6px;">Correct Identification:</div>
-      <ul class="feedback-list correct" id="correctList"></ul>
-      <div style="font-size:0.8rem; font-weight:bold; margin-top:6px;">Omitted / Missing Criteria:</div>
-      <ul class="feedback-list omitted" id="omittedList"></ul>
-      <div style="font-size:0.8rem; font-weight:bold; margin-top:6px;">RHS Examiner Notes:</div>
-      <div style="font-size:0.8rem; color:#666;" id="examinerNotes"></div>
+    <div id="comparePage" class="hidden">
+      <div class="compare-controls">
+        <select id="comparePlantA" onchange="updateComparePlant(0)">
+          <option value="">Select first plant...</option>
+        </select>
+        <select id="comparePlantB" onchange="updateComparePlant(1)">
+          <option value="">Select second plant...</option>
+        </select>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-title" id="compareTitleA">Plant 1</div>
+          <div class="compare-hint hidden" id="compareHintA"></div>
+          <div class="compare-image-container">
+            <button class="carousel-btn left hidden" id="comparePrevA" type="button" onclick="prevCompareImage(0)">‹</button>
+            <span class="image-loading" id="compareLoadingA">Select a plant</span>
+            <img id="compareImageA" src="" alt="" class="hidden">
+            <button class="carousel-btn right hidden" id="compareNextA" type="button" onclick="nextCompareImage(0)">›</button>
+            <div class="image-badge hidden" id="compareBadgeA">Image 1 of 1</div>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-title" id="compareTitleB">Plant 2</div>
+          <div class="compare-hint hidden" id="compareHintB"></div>
+          <div class="compare-image-container">
+            <button class="carousel-btn left hidden" id="comparePrevB" type="button" onclick="prevCompareImage(1)">‹</button>
+            <span class="image-loading" id="compareLoadingB">Select a plant</span>
+            <img id="compareImageB" src="" alt="" class="hidden">
+            <button class="carousel-btn right hidden" id="compareNextB" type="button" onclick="nextCompareImage(1)">›</button>
+            <div class="image-badge hidden" id="compareBadgeB">Image 1 of 1</div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 
   <div class="modal" id="hardinessModal">
@@ -577,18 +611,6 @@
     </div>
   </div>
 
-  <div class="modal" id="customGroupModal">
-    <div class="modal-content">
-      <h3 style="margin-top:0; color:var(--primary);">Create New Plant Subset</h3>
-      <input type="text" id="newGroupName" placeholder="Group Name (e.g. Week 4 Subset)..." style="margin-bottom:10px;">
-      <div style="font-size:0.8rem; font-weight:bold; margin-bottom:6px;">Select Plants for this Group:</div>
-      <div id="plantCheckboxList" style="max-height: 220px; overflow-y: auto; border: 1px solid var(--border); padding: 6px; border-radius: 6px; margin-bottom: 12px;"></div>
-      <div style="display:flex; gap:8px;">
-        <button type="button" onclick="saveCustomGroup()" style="flex:1; background:var(--primary); color:white; border:none; padding:8px; border-radius:4px; font-weight:bold; cursor:pointer;">Save Group</button>
-        <button type="button" onclick="closeCustomGroupModal()" style="flex:1; background:#6c757d; color:white; border:none; padding:8px; border-radius:4px; font-weight:bold; cursor:pointer;">Cancel</button>
-      </div>
-    </div>
-  </div>
 
   <script>
 (function (global) {
@@ -607,9 +629,25 @@
   };
 
   const focusGroupIds = [11, 20, 1, 39, 56, 69, 91, 93, 95, 102, 107];
+  const batch2Ids = [4, 8, 17, 25, 27, 31, 47, 62, 78, 79, 87, 96];
+
+  const builtInPlantPhotos = {
+    "4": ["Acer_griseum.png"],
+    "8": ["Aesculus_hippocastanum.png"],
+    "17": ["Berberis_darwinii.png"],
+    "25": ["Capsella_bursa-pastoris.png"],
+    "27": ["Choisya_ternata.png"],
+    "31": ["Cornus_sanguinea.png"],
+    "47": ["Fagus_sylvatica.png"],
+    "62": ["Liriope_muscari.png"],
+    "78": ["Photinia_×_fraseri.png"],
+    "79": ["Phyllostachys_aurea.png"],
+    "87": ["Quercus_robur.png"],
+    "96": ["Spathiphyllum_wallisii.png"]
+  };
 
   const rhsPlantDatabase = [
-    { id: 1, botanicalName: "× Cuprocyparis leylandii", commonName: "Leyland cypress", category: "Trees & Conifers", habit: "Large, fast-growing, dense evergreen conifer of columnar habit", heightSpread: "H: Higher than 12 metres | S: 4–8 metres", hardiness: "H6", light: "Full sun, Partial shade", aspect: "Any", pH: "Any", soil: "Chalk, Clay, Loam, Sand (well-drained)", uses: "Architectural; Hedging and screens", features: "Flattened sprays of scale-like evergreen foliage; very fast screening growth", nonCultivated: "Cultivated conifer", sourceUrl: "https://www.rhs.org.uk/plants/190606/x-cuprocyparis-leylandii/details" },
+    { id: 1, botanicalName: "X Cuprocyparis leylandii", commonName: "Leyland cypress", category: "Trees & Conifers", habit: "Large, fast-growing, dense evergreen conifer of columnar habit", heightSpread: "H: Higher than 12 metres | S: 4–8 metres", hardiness: "H6", light: "Full sun, Partial shade", aspect: "Any", pH: "Any", soil: "Chalk, Clay, Loam, Sand (well-drained)", uses: "Architectural; Hedging and screens", features: "Flattened sprays of scale-like evergreen foliage; very fast screening growth", nonCultivated: "Cultivated conifer", sourceUrl: "https://www.rhs.org.uk/plants/190606/x-cuprocyparis-leylandii/details" },
     { id: 4, botanicalName: "Acer griseum", commonName: "paperbark maple", category: "Trees & Conifers", habit: "Spreading deciduous tree", heightSpread: "H: 8–12 metres | S: 4–8 metres", hardiness: "H5", light: "Full sun, Partial shade", aspect: "Any", pH: "Any", soil: "Chalk, Clay, Loam, Sand (moist but well-drained)", uses: "Architectural; Specimen tree; Smaller gardens", features: "Peeling cinnamon-brown bark and rich autumn colour", nonCultivated: "Cultivated tree", sourceUrl: "https://www.rhs.org.uk/plants/197/acer-griseum/details" },
     { id: 8, botanicalName: "Aesculus hippocastanum", commonName: "horse chestnut", category: "Trees & Conifers", habit: "Large spreading deciduous tree", heightSpread: "H: Higher than 12 metres | S: Wider than 8 metres", hardiness: "H6", light: "Full sun, Partial shade", aspect: "Any", pH: "Any", soil: "Chalk, Clay, Loam, Sand (moist but well-drained)", uses: "Parkland; Large gardens; Wildlife gardens", features: "Palmate leaves, upright white flower panicles and conkers", nonCultivated: "Cultivated / naturalised tree", sourceUrl: "https://www.rhs.org.uk/plants/585/aesculus-hippocastanum/details" },
     { id: 9, botanicalName: "Agave americana", commonName: "century plant", category: "Cacti & Succulents", habit: "Rosette-forming evergreen succulent perennial", heightSpread: "H: 1–1.5 metres | S: 1–1.5 metres", hardiness: "H2", light: "Full sun", aspect: "South-facing, West-facing", pH: "Any", soil: "Loam, Sand (sharply drained)", uses: "Architectural; Patio and container plants; Conservatory", features: "Large spiny blue-green rosettes; monocarpic flower spike", nonCultivated: "Cultivated succulent", sourceUrl: "https://www.rhs.org.uk/plants/95075/agave-americana/details" },
@@ -657,7 +695,7 @@
     { id: 110, botanicalName: "Zamioculcas zamiifolia", commonName: "Zanzibar gem", category: "House plants", habit: "Evergreen rhizomatous houseplant", heightSpread: "H: 0.5–1 metres | S: 0.5–1 metres", hardiness: "H1a", light: "Full shade, Partial shade", aspect: "Sheltered indoor light", pH: "Acid, Neutral", soil: "Loam, Sand (well-drained)", uses: "Houseplants; Conservatory and greenhouse", features: "Glossy upright pinnate leaves and excellent tolerance of indoor shade", nonCultivated: "Cultivated house plant", sourceUrl: "https://www.rhs.org.uk/plants/19185/zamioculcas-zamiifolia/details" }
   ];
 
-  const payload = { hardinessDict, focusGroupIds, rhsPlantDatabase };
+  const payload = { hardinessDict, focusGroupIds, batch2Ids, builtInPlantPhotos, rhsPlantDatabase };
 
   if (typeof module !== "undefined" && module.exports) {
     module.exports = payload;
@@ -667,41 +705,125 @@
 })(typeof window !== "undefined" ? window : globalThis);
   </script>
   <script>
-    const { hardinessDict, focusGroupIds, rhsPlantDatabase } = window.RHSPlantData;
+    const { hardinessDict, focusGroupIds, batch2Ids, builtInPlantPhotos, rhsPlantDatabase } = window.RHSPlantData;
 
     let activeDatabase = [...rhsPlantDatabase];
     let currentPlant = null;
-    let customGroups = JSON.parse(localStorage.getItem("rhs_custom_groups")) || {};
     let plantImages = {};
     let currentImageIndex = 0;
-    let recognition = null;
-    let isRecording = false;
-let finalTranscript = "";
+    let compareImages = [[], []];
+    let compareImageIndexes = [0, 0];
 
-    window.addEventListener("DOMContentLoaded", () => {
-      loadSavedApiKey();
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      await loadSharedPhotos();
       populateCategoryFilter();
-      loadSavedCustomGroupsUI();
       filterByGroup();
-      setupSpeechRecognition();
     });
 
     function toggleTheme() {
       document.body.classList.toggle("dark-mode");
-    }
-
-    function saveApiKey() {
-      const key = document.getElementById("apiKeyInput").value.trim();
-      if (key) {
-        localStorage.setItem("gemini_api_key", key);
-        alert("API key saved successfully.");
+      const icon = document.getElementById("themeIcon");
+      if (icon) {
+        icon.textContent = document.body.classList.contains("dark-mode") ? "☀" : "☾";
       }
     }
 
-    function loadSavedApiKey() {
-      const key = localStorage.getItem("gemini_api_key");
-      if (key) {
-        document.getElementById("apiKeyInput").value = key;
+    function showPage(pageId, tabButton) {
+      document.getElementById("testPage").classList.toggle("hidden", pageId !== "testPage");
+      document.getElementById("comparePage").classList.toggle("hidden", pageId !== "comparePage");
+      document.querySelectorAll(".page-tab").forEach((tab) => tab.classList.remove("active"));
+      tabButton.classList.add("active");
+      if (pageId === "comparePage") populateCompareSelectors();
+    }
+
+    function populateCompareSelectors() {
+      ["comparePlantA", "comparePlantB"].forEach((id, index) => {
+        const select = document.getElementById(id);
+        const previous = Number.parseInt(select.value, 10);
+        select.innerHTML = index === 0
+          ? '<option value="">Select first plant...</option>'
+          : '<option value="">Select second plant...</option>';
+        activeDatabase.forEach((plant) => {
+          const opt = document.createElement("option");
+          opt.value = plant.id;
+          opt.textContent = `${botanicalNameForPlainText(plant.botanicalName)} (${plant.commonName})`;
+          select.appendChild(opt);
+        });
+        if (activeDatabase.some((plant) => plant.id === previous)) select.value = String(previous);
+      });
+
+      const saved = JSON.parse(localStorage.getItem("plantIdComparePair") || "null");
+      if (saved && activeDatabase.some((plant) => plant.id === Number(saved[0]))) {
+        document.getElementById("comparePlantA").value = String(saved[0]);
+      }
+      if (saved && activeDatabase.some((plant) => plant.id === Number(saved[1]))) {
+        document.getElementById("comparePlantB").value = String(saved[1]);
+      }
+
+      updateComparePlant(0);
+      updateComparePlant(1);
+    }
+
+    function updateComparePlant(index) {
+      const select = document.getElementById(index === 0 ? "comparePlantA" : "comparePlantB");
+      const plant = rhsPlantDatabase.find((item) => item.id === Number.parseInt(select.value, 10));
+      compareImages[index] = plant ? (sharedPlantPhotos[String(plant.id)] || []) : [];
+      compareImageIndexes[index] = 0;
+      renderCompareImage(index, plant);
+      localStorage.setItem("plantIdComparePair", JSON.stringify([
+        document.getElementById("comparePlantA").value || "",
+        document.getElementById("comparePlantB").value || ""
+      ]));
+    }
+
+    function renderCompareImage(index, plant) {
+      const suffix = index === 0 ? "A" : "B";
+      const imgs = compareImages[index];
+      const imgEl = document.getElementById(`compareImage${suffix}`);
+      const loadingEl = document.getElementById(`compareLoading${suffix}`);
+      const badge = document.getElementById(`compareBadge${suffix}`);
+      const prevBtn = document.getElementById(`comparePrev${suffix}`);
+      const nextBtn = document.getElementById(`compareNext${suffix}`);
+      const title = document.getElementById(`compareTitle${suffix}`);
+
+      renderBotanicalName(title, plant ? plant.botanicalName : `Plant ${index + 1}`);
+      renderPlantHint(document.getElementById(`compareHint${suffix}`), plant);
+      if (!plant || imgs.length === 0) {
+        imgEl.classList.add("hidden");
+        badge.classList.add("hidden");
+        prevBtn.classList.add("hidden");
+        nextBtn.classList.add("hidden");
+        loadingEl.textContent = plant ? "No photo available" : "Select a plant";
+        loadingEl.classList.remove("hidden");
+        return;
+      }
+
+      loadingEl.classList.add("hidden");
+      imgEl.src = imgs[compareImageIndexes[index]];
+      imgEl.alt = `${plant.botanicalName} image`;
+      imgEl.classList.remove("hidden");
+      badge.textContent = `Image ${compareImageIndexes[index] + 1} of ${imgs.length}`;
+      badge.classList.remove("hidden");
+      prevBtn.classList.toggle("hidden", imgs.length < 2);
+      nextBtn.classList.toggle("hidden", imgs.length < 2);
+    }
+
+    function prevCompareImage(index) {
+      const imgs = compareImages[index];
+      if (imgs.length > 1) {
+        compareImageIndexes[index] = (compareImageIndexes[index] - 1 + imgs.length) % imgs.length;
+        const plant = rhsPlantDatabase.find((item) => item.id === Number.parseInt(document.getElementById(index === 0 ? "comparePlantA" : "comparePlantB").value, 10));
+        renderCompareImage(index, plant);
+      }
+    }
+
+    function nextCompareImage(index) {
+      const imgs = compareImages[index];
+      if (imgs.length > 1) {
+        compareImageIndexes[index] = (compareImageIndexes[index] + 1) % imgs.length;
+        const plant = rhsPlantDatabase.find((item) => item.id === Number.parseInt(document.getElementById(index === 0 ? "comparePlantA" : "comparePlantB").value, 10));
+        renderCompareImage(index, plant);
       }
     }
 
@@ -722,13 +844,14 @@ let finalTranscript = "";
 
       if (groupVal === "CURRENT_11") {
         activeDatabase = rhsPlantDatabase.filter((plant) => focusGroupIds.includes(plant.id));
+      } else if (groupVal === "BATCH_2") {
+        activeDatabase = rhsPlantDatabase.filter((plant) => batch2Ids.includes(plant.id));
       } else if (groupVal === "ALL") {
         activeDatabase = [...rhsPlantDatabase];
-      } else if (customGroups[groupVal]) {
-        activeDatabase = rhsPlantDatabase.filter((plant) => customGroups[groupVal].includes(plant.id));
       }
 
       filterCategory();
+      populateCompareSelectors();
     }
 
     function filterCategory() {
@@ -750,7 +873,7 @@ let finalTranscript = "";
       plants.forEach((plant) => {
         const opt = document.createElement("option");
         opt.value = plant.id;
-        opt.textContent = `${plant.botanicalName} (${plant.commonName})`;
+        opt.textContent = `${botanicalNameForPlainText(plant.botanicalName)} (${plant.commonName})`;
         select.appendChild(opt);
       });
     }
@@ -768,6 +891,28 @@ let finalTranscript = "";
       }
     }
 
+    function getNavigationPool() {
+      const catVal = document.getElementById("categoryFilter").value;
+      if (catVal === "ALL") return [...activeDatabase];
+      return activeDatabase.filter((plant) => plant.category === catVal);
+    }
+
+    function previousPlant() {
+      const pool = getNavigationPool();
+      if (!currentPlant || pool.length === 0) return;
+      const currentIndex = pool.findIndex((plant) => plant.id === currentPlant.id);
+      const previousIndex = currentIndex <= 0 ? pool.length - 1 : currentIndex - 1;
+      displayPlant(pool[previousIndex]);
+    }
+
+    function nextPlant() {
+      const pool = getNavigationPool();
+      if (!currentPlant || pool.length === 0) return;
+      const currentIndex = pool.findIndex((plant) => plant.id === currentPlant.id);
+      const nextIndex = currentIndex < 0 || currentIndex === pool.length - 1 ? 0 : currentIndex + 1;
+      displayPlant(pool[nextIndex]);
+    }
+
     function loadRandomPlant(pool = activeDatabase) {
       if (!pool || pool.length === 0) return;
       const randomIndex = Math.floor(Math.random() * pool.length);
@@ -779,13 +924,10 @@ let finalTranscript = "";
 
       document.getElementById("plantIdentityBlock").classList.add("hidden");
       document.getElementById("criteriaGrid").classList.add("hidden");
-      document.getElementById("feedbackBox").style.display = "none";
-      document.getElementById("answerInput").value = "";
-      finalTranscript = "";
-
       document.getElementById("plantCategory").textContent = plant.category;
-      document.getElementById("plantBotanical").textContent = plant.botanicalName;
+      renderBotanicalName(document.getElementById("plantBotanical"), plant.botanicalName);
       document.getElementById("plantCommon").textContent = `Common: ${plant.commonName}`;
+      renderPlantHint(document.getElementById("plantHint"), plant);
       document.getElementById("metaHabit").textContent = plant.habit;
       document.getElementById("metaSize").textContent = plant.heightSpread;
       document.getElementById("metaHardiness").textContent = `${plant.hardiness} (${hardinessDict[plant.hardiness]?.temp || "temperature range unavailable"})`;
@@ -875,66 +1017,99 @@ let finalTranscript = "";
       return value.trim().toLowerCase() !== "any";
     }
 
-    function loadPlantImages(plant) {
-      currentImageIndex = 0;
-      const key = `plant_img_${plant.id}`;
-      const customImgs = JSON.parse(localStorage.getItem(key)) || [];
+    function renderBotanicalName(element, name) {
+      element.innerHTML = botanicalNameHtml(name);
+    }
 
-      if (customImgs.length > 0) {
-        plantImages[plant.id] = customImgs;
-        updateCarousel();
-      } else {
-        fetchWikimediaImage(plant);
+    function botanicalNameHtml(name) {
+      return name.split(/(\s+)/).map((token) => {
+        if (!token.trim()) return token;
+        const escaped = escapeHtml(token);
+        return shouldItalicizeBotanicalToken(token) ? `<i>${escaped}</i>` : escaped;
+      }).join("");
+    }
+
+    function botanicalNameForPlainText(name) {
+      return name.split(/(\s+)/).map((token) => {
+        if (!token.trim()) return token;
+        return shouldItalicizeBotanicalToken(token) ? toMathematicalItalic(token) : token;
+      }).join("");
+    }
+
+    function shouldItalicizeBotanicalToken(token) {
+      return !/^(×|x|X|spp\.?|sp\.?|var\.?|subsp\.?|f\.?)$/i.test(token);
+    }
+
+    function toMathematicalItalic(token) {
+      return Array.from(token).map((char) => {
+        const code = char.codePointAt(0);
+        if (code >= 65 && code <= 90) return String.fromCodePoint(0x1D434 + (code - 65));
+        if (char === "h") return "\u210E";
+        if (code >= 97 && code <= 122) return String.fromCodePoint(0x1D44E + (code - 97));
+        return char;
+      }).join("");
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function renderPlantHint(element, plant) {
+      const hint = plant?.hint?.trim();
+      element.textContent = hint ? `Plant ID hint: ${hint}` : "";
+      element.classList.toggle("hidden", !hint);
+    }
+
+    let sharedPlantPhotos = {};
+
+    async function loadSharedPhotos() {
+      try {
+        const response = await fetch("photos.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        sharedPlantPhotos = { ...builtInPlantPhotos, ...(await response.json()) };
+      } catch (error) {
+        console.error("Could not load shared photo manifest:", error);
+        sharedPlantPhotos = { ...builtInPlantPhotos };
       }
     }
 
-    async function fetchWikimediaImage(plant) {
-      document.getElementById("imageLoading").classList.remove("hidden");
-      document.getElementById("plantImage").classList.add("hidden");
-      document.getElementById("prevImgBtn").classList.add("hidden");
-      document.getElementById("nextImgBtn").classList.add("hidden");
-      document.getElementById("imageBadge").classList.add("hidden");
-
-      const query = encodeURIComponent(plant.botanicalName.replace("×", "x"));
-      const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${query}&prop=pageimages&format=json&pithumbsize=600&origin=*`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const pages = data.query.pages;
-        const pageId = Object.keys(pages)[0];
-
-        plantImages[plant.id] = pageId && pages[pageId].thumbnail
-          ? [pages[pageId].thumbnail.source]
-          : ["https://placehold.co/600x400?text=No+Photo+Available"];
-      } catch (error) {
-        console.error(error);
-        plantImages[plant.id] = ["https://placehold.co/600x400?text=Image+Load+Error"];
-      }
-
-      document.getElementById("imageLoading").classList.add("hidden");
+    async function loadPlantImages(plant) {
+      currentImageIndex = 0;
+      plantImages[plant.id] = sharedPlantPhotos[String(plant.id)] || [];
       updateCarousel();
     }
 
     function updateCarousel() {
       const imgs = plantImages[currentPlant.id] || [];
       const imgEl = document.getElementById("plantImage");
+      const loadingEl = document.getElementById("imageLoading");
       const badge = document.getElementById("imageBadge");
       const prevBtn = document.getElementById("prevImgBtn");
       const nextBtn = document.getElementById("nextImgBtn");
-      const delBtn = document.getElementById("deleteImgBtn");
 
-      if (imgs.length === 0) return;
+      if (imgs.length === 0) {
+        imgEl.classList.add("hidden");
+        badge.classList.add("hidden");
+        prevBtn.classList.add("hidden");
+        nextBtn.classList.add("hidden");
+        loadingEl.textContent = "No photo available";
+        loadingEl.classList.remove("hidden");
+        return;
+      }
 
+      loadingEl.classList.add("hidden");
       imgEl.src = imgs[currentImageIndex];
       imgEl.alt = `${currentPlant.botanicalName} image`;
       imgEl.classList.remove("hidden");
       badge.textContent = `Image ${currentImageIndex + 1} of ${imgs.length}`;
       badge.classList.remove("hidden");
-
       prevBtn.classList.toggle("hidden", imgs.length < 2);
       nextBtn.classList.toggle("hidden", imgs.length < 2);
-      delBtn.classList.toggle("hidden", !imgs[currentImageIndex].startsWith("data:image"));
     }
 
     function prevImage() {
@@ -950,43 +1125,6 @@ let finalTranscript = "";
       if (imgs.length > 1) {
         currentImageIndex = (currentImageIndex + 1) % imgs.length;
         updateCarousel();
-      }
-    }
-
-    function handleImageUpload(event) {
-      const files = event.target.files;
-      if (!currentPlant || !files || files.length === 0) return;
-
-      const key = `plant_img_${currentPlant.id}`;
-      const existing = JSON.parse(localStorage.getItem(key)) || [];
-
-      Array.from(files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = (loadEvent) => {
-          existing.push(loadEvent.target.result);
-          localStorage.setItem(key, JSON.stringify(existing));
-          plantImages[currentPlant.id] = existing;
-          currentImageIndex = existing.length - 1;
-          updateCarousel();
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function deleteCurrentImage() {
-      const key = `plant_img_${currentPlant.id}`;
-      const existing = JSON.parse(localStorage.getItem(key)) || [];
-      existing.splice(currentImageIndex, 1);
-
-      if (existing.length > 0) {
-        localStorage.setItem(key, JSON.stringify(existing));
-        plantImages[currentPlant.id] = existing;
-        currentImageIndex = Math.min(currentImageIndex, existing.length - 1);
-        updateCarousel();
-      } else {
-        localStorage.removeItem(key);
-        currentImageIndex = 0;
-        fetchWikimediaImage(currentPlant);
       }
     }
 
@@ -1014,269 +1152,7 @@ let finalTranscript = "";
       document.getElementById("hardinessModal").style.display = "none";
     }
 
-    function openCustomGroupModal() {
-      const listDiv = document.getElementById("plantCheckboxList");
-      listDiv.innerHTML = "";
 
-      rhsPlantDatabase.forEach((plant) => {
-        const label = document.createElement("label");
-        label.style.display = "block";
-        label.style.fontSize = "0.8rem";
-        label.style.marginBottom = "4px";
-
-        const chk = document.createElement("input");
-        chk.type = "checkbox";
-        chk.value = plant.id;
-        chk.style.width = "auto";
-        chk.style.marginRight = "6px";
-
-        label.appendChild(chk);
-        label.appendChild(document.createTextNode(`${plant.id}. ${plant.botanicalName} (${plant.commonName})`));
-        listDiv.appendChild(label);
-      });
-
-      document.getElementById("customGroupModal").style.display = "flex";
-    }
-
-    function closeCustomGroupModal() {
-      document.getElementById("customGroupModal").style.display = "none";
-    }
-
-    function saveCustomGroup() {
-      const nameInput = document.getElementById("newGroupName").value.trim();
-      if (!nameInput) {
-        alert("Please enter a group name.");
-        return;
-      }
-
-      const selectedIds = [];
-      const checkboxes = document.querySelectorAll('#plantCheckboxList input[type="checkbox"]:checked');
-      checkboxes.forEach((cb) => selectedIds.push(Number.parseInt(cb.value, 10)));
-
-      if (selectedIds.length === 0) {
-        alert("Please select at least one plant.");
-        return;
-      }
-
-      customGroups[nameInput] = selectedIds;
-      localStorage.setItem("rhs_custom_groups", JSON.stringify(customGroups));
-
-      loadSavedCustomGroupsUI();
-      document.getElementById("groupFilter").value = nameInput;
-      filterByGroup();
-      closeCustomGroupModal();
-    }
-
-    function loadSavedCustomGroupsUI() {
-      const select = document.getElementById("groupFilter");
-      select.querySelectorAll(".custom-group-opt").forEach((element) => element.remove());
-
-      Object.keys(customGroups).forEach((groupName) => {
-        const opt = document.createElement("option");
-        opt.value = groupName;
-        opt.className = "custom-group-opt";
-        opt.textContent = `${groupName} (${customGroups[groupName].length} Plants)`;
-        select.appendChild(opt);
-      });
-    }
-
-    function setupSpeechRecognition() {
-      if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        recognition = new SpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = "en-GB";
-
-        recognition.onresult = (event) => {
-          let interimTranscript = "";
-          for (let i = event.resultIndex; i < event.results.length; i += 1) {
-            const phrase = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-              finalTranscript += `${phrase} `;
-            } else {
-              interimTranscript += phrase;
-            }
-          }
-          document.getElementById("answerInput").value = `${finalTranscript}${interimTranscript}`.trim();
-        };
-
-        recognition.onstart = () => {
-          setVoiceStatus("Listening... speak your plant ID answer, then press the microphone again to stop.");
-        };
-
-        recognition.onerror = (event) => {
-          console.error("Speech recognition error:", event.error);
-          stopRecording(speechErrorMessage(event.error));
-        };
-
-        recognition.onend = () => {
-          stopRecording("Speech recognition stopped. You can edit the text before evaluating.");
-        };
-
-        setVoiceStatus("Speech recognition is available. If the microphone does not start from a file, open this page via http://localhost or HTTPS, or type your answer.");
-      } else {
-        setVoiceStatus("Speech recognition is not supported in this browser. Type your answer below and Gemini can still evaluate it.");
-        document.getElementById("micBtn").disabled = true;
-        document.getElementById("micBtn").title = "Speech recognition is not supported in this browser.";
-      }
-    }
-
-    function toggleSpeech() {
-      if (!recognition) {
-        setVoiceStatus("Speech recognition is not supported here. Type your answer below and press Evaluate Answer.");
-        return;
-      }
-
-      if (isRecording) {
-        recognition.stop();
-        stopRecording("Stopping...");
-      } else {
-        finalTranscript = document.getElementById("answerInput").value.trim();
-        finalTranscript = finalTranscript ? `${finalTranscript} ` : "";
-
-        if (!window.isSecureContext && location.protocol === "file:") {
-          setVoiceStatus("Trying to start the microphone. If nothing happens, open the file through a local server such as http://localhost:8000; many browsers block speech recognition from file:// pages.");
-        }
-
-        try {
-          recognition.start();
-          isRecording = true;
-          document.getElementById("micBtn").classList.add("recording");
-        } catch (error) {
-          console.error(error);
-          stopRecording("Could not start speech recognition. If the file was opened directly, try serving it from http://localhost, or type your answer below.");
-        }
-      }
-    }
-
-    function stopRecording(message = "") {
-      isRecording = false;
-      document.getElementById("micBtn").classList.remove("recording");
-      if (message) {
-        setVoiceStatus(message);
-      }
-    }
-
-    function setVoiceStatus(message) {
-      document.getElementById("voiceStatus").textContent = message;
-    }
-
-    function speechErrorMessage(error) {
-      const messages = {
-        "not-allowed": "Microphone permission was blocked. Allow microphone access in the browser, open via http://localhost or HTTPS, or type your answer below.",
-        "service-not-allowed": "This browser refused the speech recognition service. Try Chrome over http://localhost/HTTPS, or type your answer below.",
-        "no-speech": "No speech was detected. Press the microphone and try again, or type your answer below.",
-        "audio-capture": "No microphone was found or it could not be opened. Check your system input settings, or type your answer below.",
-        network: "Speech recognition had a network/service error. Type your answer below and Gemini can still evaluate it."
-      };
-      return messages[error] || `Speech recognition error: ${error}. You can type your answer below instead.`;
-    }
-
-    async function evaluateAnswer() {
-      const apiKey = localStorage.getItem("gemini_api_key");
-      if (!apiKey) {
-        alert("Please save your Gemini API key in the top box first.");
-        return;
-      }
-
-      const transcript = document.getElementById("answerInput").value.trim();
-      if (!transcript) {
-        alert("Please record or type your answer first.");
-        return;
-      }
-
-      const feedbackBox = document.getElementById("feedbackBox");
-      feedbackBox.style.display = "block";
-      document.getElementById("feedbackScore").textContent = "Evaluating with RHS Examiner...";
-      document.getElementById("correctList").innerHTML = "";
-      document.getElementById("omittedList").innerHTML = "";
-      document.getElementById("examinerNotes").textContent = "";
-
-      const officialPlantData = {
-        botanicalName: currentPlant.botanicalName,
-        commonName: currentPlant.commonName,
-        category: currentPlant.category,
-        habit: currentPlant.habit,
-        heightSpread: currentPlant.heightSpread,
-        hardiness: currentPlant.hardiness,
-        lightExposure: currentPlant.light,
-        aspect: currentPlant.aspect,
-        soilPH: currentPlant.pH,
-        soilType: currentPlant.soil,
-        uses: currentPlant.uses,
-        keyFeatures: currentPlant.features,
-        rhsSource: currentPlant.sourceUrl
-      };
-
-      const prompt = `
-You are an expert RHS (Royal Horticultural Society) Level 2 Practical Exam Examiner.
-Evaluate the student's spoken answer only against the official plant data below.
-Do not replace accepted botanical names with synonyms. For example, if the official data says Salvia rosmarinus, treat Rosmarinus officinalis only as an old synonym and keep Salvia rosmarinus as the correct answer.
-
-OFFICIAL PLANT DATA:
-${JSON.stringify(officialPlantData, null, 2)}
-
-STUDENT SPOKEN RESPONSE:
-"${transcript}"
-
-Provide evaluation output in strict JSON format matching this JSON schema:
-{
-  "score": number,
-  "correctCriteria": [string],
-  "omittedCriteria": [string],
-  "examinerNotes": "Short constructive feedback as an RHS examiner"
-}
-`;
-
-      try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { responseMimeType: "application/json" }
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`Gemini API returned ${response.status}`);
-        }
-
-        const data = await response.json();
-        const resultText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!resultText) {
-          throw new Error("Gemini API response did not include evaluation text.");
-        }
-
-        const evalData = JSON.parse(resultText);
-        renderEvaluation(evalData);
-      } catch (error) {
-        console.error(error);
-        document.getElementById("feedbackScore").textContent = "Error evaluating response.";
-        document.getElementById("examinerNotes").textContent = "Failed to connect to Gemini API or parse its response. Please check your API key and try again.";
-      }
-    }
-
-    function renderEvaluation(evalData) {
-      document.getElementById("feedbackScore").textContent = `Score: ${evalData.score}/10`;
-
-      const correctList = document.getElementById("correctList");
-      (evalData.correctCriteria || []).forEach((item) => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        correctList.appendChild(li);
-      });
-
-      const omittedList = document.getElementById("omittedList");
-      (evalData.omittedCriteria || []).forEach((item) => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        omittedList.appendChild(li);
-      });
-
-      document.getElementById("examinerNotes").textContent = evalData.examinerNotes || "";
-    }
   </script>
 </body>
 </html>
